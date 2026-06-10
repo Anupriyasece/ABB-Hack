@@ -1,0 +1,179 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "openId": "mock-user-openid",
+      "name": "Default User",
+      "email": "default@example.com",
+      "loginMethod": "mock",
+      "role": "admin",
+      "createdAt": "2026-06-10T18:03:45.800Z",
+      "updatedAt": "2026-06-10T19:18:19.923Z",
+      "lastSignedIn": "2026-06-10T19:18:19.922Z"
+    }
+  ],
+  "plcPrograms": [
+    {
+      "userId": 1,
+      "fileName": "Dvp1.dvp",
+      "fileFormat": "ST",
+      "fileSize": 524572,
+      "fileUrl": "/storage/plc-programs/1/1781114852690_Dvp1_b36453cd.dvp",
+      "fileKey": "plc-programs/1/1781114852690_Dvp1_b36453cd.dvp",
+      "description": "",
+      "id": 1,
+      "createdAt": "2026-06-10T18:07:32.699Z",
+      "updatedAt": "2026-06-10T18:07:32.699Z"
+    }
+  ],
+  "parsedPlcData": [
+    {
+      "programId": 1,
+      "conditions": "[{\"id\":\"cond_0\",\"name\":\"Start Button\",\"type\":\"Input\",\"description\":\"Condition: Start Button\"},{\"id\":\"cond_1\",\"name\":\"Stop Button\",\"type\":\"Input\",\"description\":\"Condition: Stop Button\"},{\"id\":\"cond_3\",\"name\":\"Fault Condition\",\"type\":\"Error\",\"description\":\"Condition: Fault Condition\"}]",
+      "actions": "[]",
+      "timers": "[{\"id\":\"timer_0\",\"name\":\"Timer_0\",\"duration\":1000,\"unit\":\"ms\"},{\"id\":\"timer_1\",\"name\":\"Timer_1\",\"duration\":1,\"unit\":\"ms\"},{\"id\":\"timer_2\",\"name\":\"Delay_2\",\"duration\":1,\"unit\":\"ms\"}]",
+      "counters": "[{\"id\":\"counter_0\",\"name\":\"Main Counter\",\"initialValue\":0,\"maxValue\":1000}]",
+      "alarms": "[{\"id\":\"alarm_default_1\",\"name\":\"System Fault\",\"triggerCondition\":\"Fault signal detected\",\"severity\":\"High\",\"message\":\"System fault detected\",\"affectedEquipment\":[\"System\"],\"potentialCauses\":[\"Unknown\"],\"recommendedActions\":[\"Check system status\"]},{\"id\":\"alarm_default_2\",\"name\":\"Communication Error\",\"triggerCondition\":\"No response from device\",\"severity\":\"Medium\",\"message\":\"Communication error detected\",\"affectedEquipment\":[\"Network\"],\"potentialCauses\":[\"Connection lost\",\"Device offline\"],\"recommendedActions\":[\"Check connection\",\"Restart device\"]}]",
+      "interlocks": "[{\"id\":\"interlock_1\",\"name\":\"Safety Interlock 1\",\"description\":\"Prevents motor start if emergency stop is active\",\"conditions\":[\"Emergency Stop Active\"],\"preventedAction\":\"Motor Start\"},{\"id\":\"interlock_2\",\"name\":\"Pressure Relief\",\"description\":\"Automatically stops pump if pressure exceeds limit\",\"conditions\":[\"Pressure > Max Limit\"],\"preventedAction\":\"Pump Operation\"}]",
+      "processSequences": "[{\"id\":\"seq_startup\",\"name\":\"Startup Sequence\",\"steps\":[{\"order\":1,\"name\":\"Initialize\",\"description\":\"Initialize all systems\",\"conditions\":[\"System Ready\"],\"actions\":[\"Clear faults\"]},{\"order\":2,\"name\":\"Pre-check\",\"description\":\"Perform pre-operation checks\",\"conditions\":[\"All checks pass\"],\"actions\":[\"Enable monitoring\"]},{\"order\":3,\"name\":\"Start\",\"description\":\"Start main operation\",\"conditions\":[\"Start command\"],\"actions\":[\"Start motor\"]}]},{\"id\":\"seq_operation\",\"name\":\"Normal Operation\",\"steps\":[{\"order\":1,\"name\":\"Monitor\",\"description\":\"Monitor system parameters\",\"conditions\":[\"System running\"],\"actions\":[\"Log data\"]},{\"order\":2,\"name\":\"Control\",\"description\":\"Maintain setpoints\",\"conditions\":[\"Setpoint reached\"],\"actions\":[\"Adjust output\"]},{\"order\":3,\"name\":\"Protect\",\"description\":\"Monitor safety limits\",\"conditions\":[\"Limits exceeded\"],\"actions\":[\"Trigger alarm\"]}]},{\"id\":\"seq_shutdown\",\"name\":\"Shutdown Sequence\",\"steps\":[{\"order\":1,\"name\":\"Notify\",\"description\":\"Notify operators\",\"conditions\":[\"Stop command\"],\"actions\":[\"Display message\"]},{\"order\":2,\"name\":\"Ramp down\",\"description\":\"Gradually reduce operation\",\"conditions\":[\"Ramp complete\"],\"actions\":[\"Reduce speed\"]},{\"order\":3,\"name\":\"Stop\",\"description\":\"Stop all equipment\",\"conditions\":[\"Safe to stop\"],\"actions\":[\"Stop motor\"]},{\"order\":4,\"name\":\"Secure\",\"description\":\"Secure the system\",\"conditions\":[\"All stopped\"],\"actions\":[\"Lock equipment\"]}]}]",
+      "equipment": "[{\"id\":\"equip_0\",\"name\":\"Motor\",\"type\":\"Actuator\",\"description\":\"Motor - Actuator\",\"controlledBy\":[],\"monitoredBy\":[]},{\"id\":\"equip_5\",\"name\":\"Conveyor\",\"type\":\"Transport\",\"description\":\"Conveyor - Transport\",\"controlledBy\":[],\"monitoredBy\":[]}]",
+      "sensors": "[{\"id\":\"sensor_2\",\"name\":\"Level Sensor\",\"type\":\"Level\",\"measuredValue\":\"Tank Level\",\"unit\":\"%\",\"equipment\":\"Tank\"}]",
+      "actuators": "[{\"id\":\"actuator_1\",\"name\":\"Motor Contactor\",\"type\":\"Control\",\"controlsEquipment\":\"Motor\",\"possibleStates\":[\"On\",\"Off\"]},{\"id\":\"actuator_2\",\"name\":\"Pump Valve\",\"type\":\"Control\",\"controlsEquipment\":\"Pump\",\"possibleStates\":[\"Open\",\"Closed\"]}]",
+      "safetyRules": "[{\"id\":\"safety_1\",\"name\":\"Emergency Stop Protection\",\"description\":\"Immediately stops all equipment when emergency stop is activated\",\"protectedAssets\":[\"Motor\",\"Pump\",\"Compressor\"],\"triggerConditions\":[\"Emergency Stop Button Pressed\"],\"safetyActions\":[\"Stop all motors\",\"Close all valves\",\"Activate alarm\"]},{\"id\":\"safety_2\",\"name\":\"Overpressure Protection\",\"description\":\"Prevents system damage from excessive pressure\",\"protectedAssets\":[\"Pump\",\"Tank\",\"Compressor\"],\"triggerConditions\":[\"Pressure > Max Limit\"],\"safetyActions\":[\"Open relief valve\",\"Stop pump\",\"Log event\"]},{\"id\":\"safety_3\",\"name\":\"Overtemperature Protection\",\"description\":\"Protects equipment from thermal damage\",\"protectedAssets\":[\"Motor\",\"Compressor\"],\"triggerConditions\":[\"Temperature > Max Limit\"],\"safetyActions\":[\"Reduce load\",\"Increase cooling\",\"Stop if critical\"]}]",
+      "controlLoops": "[{\"id\":\"loop_1\",\"name\":\"Pressure Control\",\"inputSignal\":\"Pressure Sensor\",\"outputSignal\":\"Pump Speed\",\"controlType\":\"PID\",\"setpoint\":50},{\"id\":\"loop_2\",\"name\":\"Temperature Control\",\"inputSignal\":\"Temperature Sensor\",\"outputSignal\":\"Cooling Valve\",\"controlType\":\"On-Off\"},{\"id\":\"loop_3\",\"name\":\"Level Control\",\"inputSignal\":\"Level Sensor\",\"outputSignal\":\"Fill Valve\",\"controlType\":\"PID\",\"setpoint\":50}]",
+      "logicBlockCount": 3,
+      "equipmentCount": 2,
+      "alarmCount": 2,
+      "safetyRuleCount": 3,
+      "controlLoopCount": 3,
+      "id": 1,
+      "createdAt": "2026-06-10T18:07:32.791Z",
+      "updatedAt": "2026-06-10T18:07:32.791Z"
+    }
+  ],
+  "knowledgeGraphNodes": [
+    {
+      "programId": 1,
+      "nodeId": "equip_0",
+      "nodeType": "Equipment",
+      "label": "Motor",
+      "description": "Motor - Actuator",
+      "properties": "{\"id\":\"equip_0\",\"name\":\"Motor\",\"type\":\"Actuator\",\"description\":\"Motor - Actuator\",\"controlledBy\":[],\"monitoredBy\":[]}",
+      "id": 1,
+      "createdAt": "2026-06-10T18:07:32.793Z"
+    },
+    {
+      "programId": 1,
+      "nodeId": "equip_5",
+      "nodeType": "Equipment",
+      "label": "Conveyor",
+      "description": "Conveyor - Transport",
+      "properties": "{\"id\":\"equip_5\",\"name\":\"Conveyor\",\"type\":\"Transport\",\"description\":\"Conveyor - Transport\",\"controlledBy\":[],\"monitoredBy\":[]}",
+      "id": 2,
+      "createdAt": "2026-06-10T18:07:32.795Z"
+    },
+    {
+      "programId": 1,
+      "nodeId": "sensor_2",
+      "nodeType": "Sensor",
+      "label": "Level Sensor",
+      "description": "Level - Tank Level",
+      "properties": "{\"id\":\"sensor_2\",\"name\":\"Level Sensor\",\"type\":\"Level\",\"measuredValue\":\"Tank Level\",\"unit\":\"%\",\"equipment\":\"Tank\"}",
+      "id": 3,
+      "createdAt": "2026-06-10T18:07:32.796Z"
+    },
+    {
+      "programId": 1,
+      "nodeId": "actuator_1",
+      "nodeType": "Actuator",
+      "label": "Motor Contactor",
+      "description": "Controls Motor",
+      "properties": "{\"id\":\"actuator_1\",\"name\":\"Motor Contactor\",\"type\":\"Control\",\"controlsEquipment\":\"Motor\",\"possibleStates\":[\"On\",\"Off\"]}",
+      "id": 4,
+      "createdAt": "2026-06-10T18:07:32.797Z"
+    },
+    {
+      "programId": 1,
+      "nodeId": "actuator_2",
+      "nodeType": "Actuator",
+      "label": "Pump Valve",
+      "description": "Controls Pump",
+      "properties": "{\"id\":\"actuator_2\",\"name\":\"Pump Valve\",\"type\":\"Control\",\"controlsEquipment\":\"Pump\",\"possibleStates\":[\"Open\",\"Closed\"]}",
+      "id": 5,
+      "createdAt": "2026-06-10T18:07:32.800Z"
+    },
+    {
+      "programId": 1,
+      "nodeId": "alarm_default_1",
+      "nodeType": "Alarm",
+      "label": "System Fault",
+      "description": "System fault detected",
+      "properties": "{\"id\":\"alarm_default_1\",\"name\":\"System Fault\",\"triggerCondition\":\"Fault signal detected\",\"severity\":\"High\",\"message\":\"System fault detected\",\"affectedEquipment\":[\"System\"],\"potentialCauses\":[\"Unknown\"],\"recommendedActions\":[\"Check system status\"]}",
+      "id": 6,
+      "createdAt": "2026-06-10T18:07:32.801Z"
+    },
+    {
+      "programId": 1,
+      "nodeId": "alarm_default_2",
+      "nodeType": "Alarm",
+      "label": "Communication Error",
+      "description": "Communication error detected",
+      "properties": "{\"id\":\"alarm_default_2\",\"name\":\"Communication Error\",\"triggerCondition\":\"No response from device\",\"severity\":\"Medium\",\"message\":\"Communication error detected\",\"affectedEquipment\":[\"Network\"],\"potentialCauses\":[\"Connection lost\",\"Device offline\"],\"recommendedActions\":[\"Check connection\",\"Restart device\"]}",
+      "id": 7,
+      "createdAt": "2026-06-10T18:07:32.802Z"
+    },
+    {
+      "programId": 1,
+      "nodeId": "safety_1",
+      "nodeType": "SafetyRule",
+      "label": "Emergency Stop Protection",
+      "description": "Immediately stops all equipment when emergency stop is activated",
+      "properties": "{\"id\":\"safety_1\",\"name\":\"Emergency Stop Protection\",\"description\":\"Immediately stops all equipment when emergency stop is activated\",\"protectedAssets\":[\"Motor\",\"Pump\",\"Compressor\"],\"triggerConditions\":[\"Emergency Stop Button Pressed\"],\"safetyActions\":[\"Stop all motors\",\"Close all valves\",\"Activate alarm\"]}",
+      "id": 8,
+      "createdAt": "2026-06-10T18:07:32.804Z"
+    },
+    {
+      "programId": 1,
+      "nodeId": "safety_2",
+      "nodeType": "SafetyRule",
+      "label": "Overpressure Protection",
+      "description": "Prevents system damage from excessive pressure",
+      "properties": "{\"id\":\"safety_2\",\"name\":\"Overpressure Protection\",\"description\":\"Prevents system damage from excessive pressure\",\"protectedAssets\":[\"Pump\",\"Tank\",\"Compressor\"],\"triggerConditions\":[\"Pressure > Max Limit\"],\"safetyActions\":[\"Open relief valve\",\"Stop pump\",\"Log event\"]}",
+      "id": 9,
+      "createdAt": "2026-06-10T18:07:32.806Z"
+    },
+    {
+      "programId": 1,
+      "nodeId": "safety_3",
+      "nodeType": "SafetyRule",
+      "label": "Overtemperature Protection",
+      "description": "Protects equipment from thermal damage",
+      "properties": "{\"id\":\"safety_3\",\"name\":\"Overtemperature Protection\",\"description\":\"Protects equipment from thermal damage\",\"protectedAssets\":[\"Motor\",\"Compressor\"],\"triggerConditions\":[\"Temperature > Max Limit\"],\"safetyActions\":[\"Reduce load\",\"Increase cooling\",\"Stop if critical\"]}",
+      "id": 10,
+      "createdAt": "2026-06-10T18:07:32.807Z"
+    }
+  ],
+  "knowledgeGraphRelationships": [
+    {
+      "programId": 1,
+      "sourceNodeId": "actuator_1",
+      "targetNodeId": "equip_0",
+      "relationshipType": "Controls",
+      "id": 1,
+      "createdAt": "2026-06-10T18:07:32.809Z"
+    }
+  ],
+  "narratives": [
+    {
+      "programId": 1,
+      "stakeholderType": "Engineer",
+      "title": "Engineer Narrative - Dvp1.dvp",
+      "content": "**PLC Program Narrative: Dvp1.dvp (ST)**\n\n**Functional Description:**\nThe Dvp1.dvp (ST) PLC program is designed to control and monitor the operation of a motor-driven conveyor system. The program provides a comprehensive set of functions to ensure safe and efficient operation, including start and stop control, fault detection, and alarm handling. The program is written in a structured text (ST) format, utilizing a modular and object-oriented approach to facilitate easy maintenance, modification, and scalability.\n\n**Sequence of Operation:**\nThe sequence of operation for the Dvp1.dvp (ST) PLC program is as follows:\n\n1. **Initialization**: Upon power-up, the program initializes all internal variables, sets the motor to a stopped state, and resets all alarms.\n2. **Start Button Pressed**: When the start button is pressed, the program checks for any fault conditions or active alarms. If none are present, the program enables the motor and conveyor, and the system begins operation.\n3. **Conveyor Operation**: The program continuously monitors the conveyor's operation, checking for any fault conditions, such as overpressure or overtemperature. If a fault condition is detected, the program immediately stops the motor and conveyor, and triggers the corresponding alarm.\n4. **Stop Button Pressed**: When the stop button is pressed, the program disables the motor and conveyor, bringing the system to a safe stop.\n5. **Fault Condition**: If a fault condition is detected, the program triggers the corresponding alarm and shuts down the motor and conveyor to prevent further damage or risk to personnel.\n6. **Alarm Handling**: The program provides a comprehensive alarm handling system, with separate alarms for system faults, communication errors, and safety-related events. Each alarm is accompanied by a unique identifier, description, and recommended corrective action.\n\n**Alarm Analysis:**\nThe Dvp1.dvp (ST) PLC program includes the following alarms:\n\n1. **System Fault**: This alarm is triggered when a critical system failure occurs, such as a motor or conveyor malfunction. The alarm is accompanied by a description of the fault and recommended corrective actions.\n2. **Communication Error**: This alarm is triggered when a communication error occurs between the PLC and other devices, such as sensors or actuators. The alarm is accompanied by a description of the error and recommended troubleshooting steps.\n\n**Safety Interlocks:**\nThe Dvp1.dvp (ST) PLC program includes the following safety interlocks:\n\n1. **Emergency Stop Protection**: The program provides an emergency stop function, which immediately shuts down the motor and conveyor in the event of an emergency. The emergency stop function can be triggered manually or automatically, in response to a fault condition or alarm.\n2. **Overpressure Protection**: The program continuously monitors the conveyor's pressure and triggers an alarm if the pressure exceeds a predetermined threshold. The program then shuts down the motor and conveyor to prevent further damage or risk to personnel.\n3. **Overtemperature Protection**: The program continuously monitors the motor and conveyor's temperature and triggers an alarm if the temperature exceeds a predetermined threshold. The program then shuts down the motor and conveyor to prevent further damage or risk to personnel.\n\n**Process Summary:**\nThe Dvp1.dvp (ST) PLC program controls and monitors the operation of a motor-driven conveyor system, providing a comprehensive set of functions to ensure safe and efficient operation. The program includes start and stop control, fault detection, alarm handling, and safety interlocks to prevent accidents and minimize downtime.\n\n**Asset Summary:**\nThe Dvp1.dvp (ST) PLC program utilizes the following assets:\n\n1. **Motor**: A three-phase induction motor drives the conveyor.\n2. **Conveyor**: A belt-driven conveyor transports materials from one location to another.\n3. **PLC**: A programmable logic controller (PLC) executes the Dvp1.dvp (ST) program, providing control and monitoring functions for the motor and conveyor.\n4. **Sensors**: Various sensors, such as pressure and temperature sensors, provide feedback to the PLC, enabling the program to monitor the conveyor's operation and detect fault conditions.\n5. **Actuators**: Various actuators, such as contactors and valves, are controlled by the PLC to enable or disable the motor and conveyor.\n\nIn conclusion, the Dvp1.dvp (ST) PLC program provides a comprehensive set of functions to control and monitor the operation of a motor-driven conveyor system. The program's safety interlocks, alarm handling, and fault detection capabilities ensure safe and efficient operation, while its modular design facilitates easy maintenance, modification, and scalability.",
+      "functionalDescription": "**PLC Program Narrative: Dvp1.dvp (ST)**",
+      "id": 1,
+      "createdAt": "2026-06-10T18:07:44.886Z",
+      "updatedAt": "2026-06-10T18:07:44.886Z"
+    }
+  ],
+  "analysisResults": []
+}
