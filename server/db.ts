@@ -5,6 +5,7 @@ import { ENV } from './_core/env';
 import fs from "fs";
 import path from "path";
 import os from "os";
+import mysql from "mysql2/promise";
 
 const isServerless = !!process.env.NETLIFY || !!process.env.AWS_LAMBDA_FUNCTION_NAME || !!process.env.LAMBDA_TASK_ROOT;
 const DB_FILE = isServerless
@@ -104,7 +105,13 @@ let _db: ReturnType<typeof drizzle> | null = null;
 export async function getDb() {
   if (!_db && ENV.databaseUrl) {
     try {
-      _db = drizzle(ENV.databaseUrl);
+      const pool = mysql.createPool({
+        uri: ENV.databaseUrl,
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      });
+      _db = drizzle(pool);
     } catch (error) {
       console.warn("[Database] Failed to connect:", error);
       _db = null;
