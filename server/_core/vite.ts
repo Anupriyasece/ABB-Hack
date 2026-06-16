@@ -48,14 +48,21 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const distPath =
-    process.env.NODE_ENV === "development"
-      ? path.resolve(import.meta.dirname, "../..", "dist", "public")
-      : path.resolve(import.meta.dirname, "public");
-  if (!fs.existsSync(distPath)) {
-    console.error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`
-    );
+  let distPath = path.resolve(import.meta.dirname, "public");
+
+  // Fallback paths to make it robust on Vercel and other hosting environments
+  const possiblePaths = [
+    distPath,
+    path.resolve(import.meta.dirname, "../..", "dist", "public"),
+    path.join(process.cwd(), "dist", "public"),
+    path.join(process.cwd(), "public"),
+  ];
+
+  for (const p of possiblePaths) {
+    if (fs.existsSync(p) && fs.existsSync(path.join(p, "index.html"))) {
+      distPath = p;
+      break;
+    }
   }
 
   app.use(express.static(distPath));
