@@ -4,8 +4,12 @@ import { InsertUser, users, plcPrograms, parsedPlcData, narratives, knowledgeGra
 import { ENV } from './_core/env';
 import fs from "fs";
 import path from "path";
+import os from "os";
 
-const DB_FILE = path.join(process.cwd(), "db.json");
+const isServerless = !!process.env.NETLIFY || !!process.env.AWS_LAMBDA_FUNCTION_NAME || !!process.env.LAMBDA_TASK_ROOT;
+const DB_FILE = isServerless
+  ? path.join(os.tmpdir(), "db.json")
+  : path.join(process.cwd(), "db.json");
 
 interface LocalDb {
   users: any[];

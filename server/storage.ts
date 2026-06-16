@@ -6,8 +6,12 @@
 import { ENV } from "./_core/env";
 import fs from "fs";
 import path from "path";
+import os from "os";
 
-const UPLOADS_DIR = path.join(process.cwd(), "uploads");
+const isServerless = !!process.env.NETLIFY || !!process.env.AWS_LAMBDA_FUNCTION_NAME || !!process.env.LAMBDA_TASK_ROOT;
+const UPLOADS_DIR = isServerless
+  ? path.join(os.tmpdir(), "uploads")
+  : path.join(process.cwd(), "uploads");
 
 function getForgeConfig() {
   const forgeUrl = ENV.forgeApiUrl;

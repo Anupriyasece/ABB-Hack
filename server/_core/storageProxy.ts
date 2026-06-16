@@ -2,6 +2,12 @@ import type { Express } from "express";
 import { ENV } from "./env";
 import fs from "fs";
 import path from "path";
+import os from "os";
+
+const isServerless = !!process.env.NETLIFY || !!process.env.AWS_LAMBDA_FUNCTION_NAME || !!process.env.LAMBDA_TASK_ROOT;
+const UPLOADS_DIR = isServerless
+  ? path.join(os.tmpdir(), "uploads")
+  : path.join(process.cwd(), "uploads");
 
 export function registerStorageProxy(app: Express) {
   app.get("/storage/*", async (req, res) => {
@@ -12,7 +18,7 @@ export function registerStorageProxy(app: Express) {
     }
 
     // First check if file is stored locally
-    const localPath = path.join(process.cwd(), "uploads", key);
+    const localPath = path.join(UPLOADS_DIR, key);
     if (fs.existsSync(localPath)) {
       res.sendFile(localPath);
       return;
