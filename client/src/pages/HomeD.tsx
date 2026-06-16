@@ -1,11 +1,14 @@
-import { useRoute } from "wouter";
+import { useRoute, useLocation } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, AlertCircle, TrendingUp, Zap, Shield, AlertTriangle } from "lucide-react";
+import { Loader2, AlertCircle, TrendingUp, Zap, Shield, AlertTriangle, Upload } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
+import { Button } from "@/components/ui/button";
+
 
 export default function HomeD() {
   const [, params] = useRoute("/dashboard/:programId/home");
+  const [, navigate] = useLocation();
   const programId = params?.programId ? parseInt(params.programId) : 0;
 
   const { data: parsedData, isLoading, error } = trpc.plc.getParsedData.useQuery(
@@ -79,9 +82,18 @@ export default function HomeD() {
   return (
     <div className="p-8 space-y-8 max-w-7xl mx-auto">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">PLC System Overview</h1>
-        <p className="text-slate-600 dark:text-slate-400">Real-time analysis of your PLC program</p>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">PLC System Overview</h1>
+          <p className="text-slate-600 dark:text-slate-400">Real-time analysis of your PLC program</p>
+        </div>
+        <Button
+          onClick={() => navigate("/upload")}
+          className="bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2"
+        >
+          <Upload className="h-4 w-4" />
+          Upload PLC Program
+        </Button>
       </div>
 
       {/* Metric Cards Grid */}

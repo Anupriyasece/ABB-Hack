@@ -14,7 +14,8 @@ import {
   Sun,
   LogOut,
   Menu,
-  X
+  X,
+  Upload
 } from "lucide-react";
 import { useState } from "react";
 
@@ -26,6 +27,7 @@ const navigationItems = [
   { href: "/dashboard/:programId/safety", label: "Safety", icon: Shield },
   { href: "/dashboard/:programId/alarms", label: "Alarms", icon: AlertCircle },
   { href: "/dashboard/:programId/digital-twin", label: "Digital Twin", icon: Zap },
+  { href: "/upload", label: "Upload File", icon: Upload },
 ];
 
 export default function Sidebar() {
@@ -72,8 +74,9 @@ export default function Sidebar() {
         <nav className="flex-1 overflow-y-auto p-4 space-y-2">
           {navigationItems.map((item) => {
             const Icon = item.icon;
-            const isActive = params?.page === item.href.split("/").pop();
-            const href = `/dashboard/${programId}/${item.href.split("/").pop()}`;
+            const isAbsolute = item.href.startsWith("/upload");
+            const isActive = isAbsolute ? params?.page === "upload" : params?.page === item.href.split("/").pop();
+            const href = isAbsolute ? "/upload" : `/dashboard/${programId}/${item.href.split("/").pop()}`;
 
             return (
               <a
